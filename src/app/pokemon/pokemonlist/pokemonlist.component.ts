@@ -5,23 +5,19 @@ import { Pokemon } from '../interfaces/pokemon.interfaces';
 @Component({
   selector: 'app-pokemonlist',
   templateUrl: './pokemonlist.component.html',
-  styleUrls: ['./pokemonlist.component.css']
+  styleUrls: ['./pokemonlist.component.css'],
 })
 export class PokemonlistComponent implements OnInit {
-
   public pokemons: Pokemon[] = [];
   public page: number = 0;
   public search: string = '';
 
-  constructor( private pokemonService: PokemonService ) { }
+  constructor(private pokemonService: PokemonService) {}
 
   ngOnInit(): void {
-
-    this.pokemonService.getAllPokemons()
-      .subscribe( pokemons => {
-        this.pokemons = pokemons;
-      });
-
+    this.pokemonService.getAllPokemons().subscribe((pokemons) => {
+      this.pokemons = pokemons;
+    });
   }
 
   nextPage() {
@@ -29,13 +25,11 @@ export class PokemonlistComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
-      this.page -= 5;
+    if (this.page > 0) this.page -= 5;
   }
 
-  onSearchPokemon( search: string ) {
+  onSearchPokemon(search: string) {
     this.page = 0;
     this.search = search;
   }
-
 }
